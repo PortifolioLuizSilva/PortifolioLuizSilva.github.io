@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre - Bem Vindo(a)</title>
+    <title>Sobre - Blog com Rádio</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url('https://media.giphy.com/media/axnFGXT6MzvgY/giphy.gif') no-repeat center center fixed;
+            background: url('https://media.giphy.com/media/dark-cyberpunk-axnFGXT6MzvgY/giphy.gif') no-repeat center center fixed;
             background-size: cover;
             color: #ffffff;
             margin: 0;
@@ -16,35 +16,37 @@
 
         .container {
             display: flex;
-            max-width: 1200px;
+            flex-wrap: wrap;
+            max-width: 100%;
             margin: 0 auto;
             background-color: rgba(0, 0, 0, 0.7);
             padding: 20px;
             border-radius: 15px;
+            box-sizing: border-box;
         }
 
         .sidebar, .content {
-            width: 20%;
             padding: 20px;
         }
 
         .sidebar {
-            border-right: 1px solid #38444d;
+            width: 100%;
+            border-bottom: 1px solid #38444d;
+            text-align: center;
+            box-sizing: border-box;
         }
 
         .content {
-            width: 60%;
-            padding: 20px;
+            width: 100%;
             text-align: center;
-            border-left: 1px solid #38444d;
-            border-right: 1px solid #38444d;
+            box-sizing: border-box;
         }
 
         .logo {
             font-size: 1.5em;
             font-weight: bold;
             margin-bottom: 20px;
-            text-align: center;
+            color: #1da1f2;
         }
 
         .menu-item {
@@ -55,6 +57,11 @@
             color: #1da1f2;
             border-radius: 25px;
             text-align: center;
+        }
+
+        .menu-item a {
+            color: #1da1f2;
+            text-decoration: none;
         }
 
         .menu-item:hover {
@@ -74,6 +81,21 @@
             color: #ffffff;
             margin-top: 20px;
         }
+
+        @media (min-width: 600px) {
+            .sidebar {
+                width: 20%;
+                border-right: 1px solid #38444d;
+                border-bottom: none;
+                text-align: left;
+            }
+
+            .content {
+                width: 60%;
+                border-left: 1px solid #38444d;
+                border-right: 1px solid #38444d;
+            }
+        }
     </style>
 </head>
 <body>
@@ -82,9 +104,9 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="logo">Rádio do Blog</div>
-            <div class="menu-item"><a href="index.html" style="color: #1da1f2; text-decoration: none;">Página Inicial</a></div>
-            <div class="menu-item"><a href="sobre.html" style="color: #1da1f2; text-decoration: none;">Sobre</a></div>
-            <div class="menu-item"><a href="mailto:wireshark.luiz@proton.me" style="color: #1da1f2; text-decoration: none;">Contato</a></div>
+            <div class="menu-item"><a href="index.html">Página Inicial</a></div>
+            <div class="menu-item"><a href="sobre.html">Sobre</a></div>
+            <div class="menu-item"><a href="mailto:wireshark.luiz@proton.me">Contato</a></div>
         </div>
 
         <!-- Content -->
