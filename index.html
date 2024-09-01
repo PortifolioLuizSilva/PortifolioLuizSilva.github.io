@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog com Rádio</title>
+    <title>Blog com Contador de Visualizações</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -69,17 +69,23 @@
             color: #ffffff;
         }
 
-        .radio-title {
+        .counter-title {
             font-size: 2em;
             margin-bottom: 20px;
             color: #1da1f2;
         }
 
-        iframe {
-            width: 100%;
-            height: 380px; /* Altura ajustada para melhor visualização dos botões */
-            border: none;
+        .counter-container {
+            background-color: #1e1e1e;
+            padding: 20px;
             border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .counter-container p {
+            font-size: 1.2em;
+            margin: 0;
         }
 
         @media (max-width: 768px) {
@@ -95,8 +101,8 @@
                 width: 100%;
             }
 
-            iframe {
-                height: 250px; /* Ajuste da altura para telas menores */
+            .counter-container {
+                width: 100%;
             }
         }
     </style>
@@ -106,7 +112,7 @@
     <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
-            <div class="logo">Rádio do Blog</div>
+            <div class="logo">Blog com Contador</div>
             <div class="menu-item"><a href="index.html">Página Inicial</a></div>
             <div class="menu-item"><a href="sobre.html">Sobre</a></div>
             <div class="menu-item"><a href="mailto:wireshark.luiz@proton.me">Contato</a></div>
@@ -114,11 +120,34 @@
 
         <!-- Content -->
         <div class="content">
-            <div class="radio-title">Ouça Nossa Rádio</div>
-            <!-- Rádio com playlist do Spotify -->
-            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn" allowtransparency="true" allow="encrypted-media"></iframe>
+            <div class="counter-title">Contador de Visualizações</div>
+            <!-- Contador de visualizações -->
+            <div class="counter-container">
+                <p>Esta página foi visualizada <span id="viewCount">0</span> vezes.</p>
+            </div>
         </div>
     </div>
+
+    <script>
+        // Função para atualizar o contador de visualizações
+        function updateViewCount() {
+            // Obter o contador de visualizações do localStorage
+            let viewCount = localStorage.getItem('viewCount');
+            if (!viewCount) {
+                viewCount = 0;
+            }
+            viewCount = parseInt(viewCount) + 1;
+
+            // Atualizar o contador no localStorage
+            localStorage.setItem('viewCount', viewCount);
+
+            // Atualizar o contador na página
+            document.getElementById('viewCount').textContent = viewCount;
+        }
+
+        // Chamar a função ao carregar a página
+        updateViewCount();
+    </script>
 
 </body>
 </html>
