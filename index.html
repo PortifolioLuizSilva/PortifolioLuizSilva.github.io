@@ -1,3 +1,154 @@
 cd username.github.io
 
 echo "Hello World" > index.html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio: Luiz Silva</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #15202B;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .navbar {
+            background-color: #1DA1F2;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar h1 {
+            font-size: 24px;
+            margin: 0;
+            color: #ffffff;
+        }
+        
+        .navbar img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .profile {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #1DA1F2;
+        }
+        
+        .profile h2 {
+            font-size: 28px;
+            margin: 10px 0 0 0;
+            color: #1DA1F2;
+        }
+        
+        .post {
+            background-color: #192734;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        
+        .post h3 {
+            margin: 0 0 10px 0;
+            color: #1DA1F2;
+        }
+        
+        .post p {
+            font-size: 18px;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .actions button {
+            background-color: transparent;
+            border: none;
+            color: #1DA1F2;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .counter {
+            font-size: 16px;
+            color: #1DA1F2;
+        }
+
+        .comment-section {
+            margin-top: 20px;
+        }
+
+        .comment-section input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #38444d;
+            background-color: #253341;
+            color: #ffffff;
+        }
+
+        .comment-section button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #1DA1F2;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Portfólio: Luiz Silva</h1>
+        <img src="foto-perfil.jpg" alt="Foto de Luiz Silva">
+    </div>
+    
+    <div class="content">
+        <div class="profile">
+            <img src="foto-perfil.jpg" alt="Foto de Luiz Silva">
+            <h2>Luiz Silva</h2>
+        </div>
+        
+        <div class="post">
+            <h3>Título do Post</h3>
+            <p>Este é um exemplo de matéria sobre tecnologia. Aqui você pode escrever sobre as últimas tendências, tutoriais e muito mais.</p>
+            <div class="actions">
+                <div>
+                    <button>Curtir</button>
+                    <button>Descurtir</button>
+                </div>
+                <div class="counter">Visitantes: 1234</div>
+            </div>
+            <div class="comment-section">
+                <input type="text" placeholder="Adicione um comentário">
+                <button>Comentar</button>
+            </div>
+        </div>
+
+        <!-- Adicione mais posts aqui -->
+        
+    </div>
+</body>
+</html>
