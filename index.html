@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog com Contador de Visualizações</title>
+    <title>Blog com Jogo da Cobrinha</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,6 +38,9 @@
             margin-left: 250px;
             padding: 20px;
             width: calc(100% - 250px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .logo {
@@ -69,23 +72,27 @@
             color: #ffffff;
         }
 
-        .counter-title {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #1da1f2;
-        }
-
-        .counter-container {
+        .game-container {
+            width: 600px;
+            height: 400px;
             background-color: #1e1e1e;
-            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .counter-container p {
+        #snakeCanvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        #repoCount {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: #ffffff;
             font-size: 1.2em;
-            margin: 0;
         }
 
         @media (max-width: 768px) {
@@ -99,10 +106,12 @@
             .content {
                 margin-left: 0;
                 width: 100%;
+                padding: 10px;
             }
 
-            .counter-container {
+            .game-container {
                 width: 100%;
+                height: 300px;
             }
         }
     </style>
@@ -112,7 +121,7 @@
     <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
-            <div class="logo">Blog com Contador</div>
+            <div class="logo">Blog com Jogo da Cobrinha</div>
             <div class="menu-item"><a href="index.html">Página Inicial</a></div>
             <div class="menu-item"><a href="sobre.html">Sobre</a></div>
             <div class="menu-item"><a href="mailto:wireshark.luiz@proton.me">Contato</a></div>
@@ -120,33 +129,110 @@
 
         <!-- Content -->
         <div class="content">
-            <div class="counter-title">Contador de Visualizações</div>
-            <!-- Contador de visualizações -->
-            <div class="counter-container">
-                <p>Esta página foi visualizada <span id="viewCount">0</span> vezes.</p>
+            <div class="game-container">
+                <canvas id="snakeCanvas"></canvas>
+                <div id="repoCount">Repositórios: 0</div>
             </div>
         </div>
     </div>
 
     <script>
-        // Função para atualizar o contador de visualizações
-        function updateViewCount() {
-            // Obter o contador de visualizações do localStorage
-            let viewCount = localStorage.getItem('viewCount');
-            if (!viewCount) {
-                viewCount = 0;
+        // Jogo da Cobrinha
+        const canvas = document.getElementById('snakeCanvas');
+        const ctx = canvas.getContext('2d');
+        const scale = 20;
+        const rows = canvas.height / scale;
+        const columns = canvas.width / scale;
+
+        let snake = [{ x: 2 * scale, y: 2 * scale }];
+        let direction = 'RIGHT';
+        let food = { x: Math.floor(Math.random() * columns) * scale, y: Math.floor(Math.random() * rows) * scale };
+        let score = 0;
+        let repoData = [];
+
+        document.addEventListener('keydown', (event) => {
+            switch (event.key) {
+                case 'ArrowUp':
+                    if (direction !== 'DOWN') direction = 'UP';
+                    break;
+                case 'ArrowDown':
+                    if (direction !== 'UP') direction = 'DOWN';
+                    break;
+                case 'ArrowLeft':
+                    if (direction !== 'RIGHT') direction = 'LEFT';
+                    break;
+                case 'ArrowRight':
+                    if (direction !== 'LEFT') direction = 'RIGHT';
+                    break;
             }
-            viewCount = parseInt(viewCount) + 1;
+        });
 
-            // Atualizar o contador no localStorage
-            localStorage.setItem('viewCount', viewCount);
+        function update() {
+            let head = { ...snake[0] };
 
-            // Atualizar o contador na página
-            document.getElementById('viewCount').textContent = viewCount;
+            switch (direction) {
+                case 'UP':
+                    head.y -= scale;
+                    break;
+                case 'DOWN':
+                    head.y += scale;
+                    break;
+                case 'LEFT':
+                    head.x -= scale;
+                    break;
+                case 'RIGHT':
+                    head.x += scale;
+                    break;
+            }
+
+            if (head.x === food.x && head.y === food.y) {
+                score++;
+                food = { x: Math.floor(Math.random() * columns) * scale, y: Math.floor(Math.random() * rows) * scale };
+                fetchRepositories();
+            } else {
+                snake.pop();
+            }
+
+            snake.unshift(head);
+
+            if (head.x < 0 || head.y < 0 || head.x >= canvas.width || head.y >= canvas.height || snake.slice(1).some(segment => segment.x === head.x && segment.y === head.y)) {
+                alert('Game Over!');
+                snake = [{ x: 2 * scale, y: 2 * scale }];
+                direction = 'RIGHT';
+                score = 0;
+            }
+
+            draw();
         }
 
-        // Chamar a função ao carregar a página
-        updateViewCount();
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ffffff';
+            snake.forEach(segment => ctx.fillRect(segment.x, segment.y, scale, scale));
+            ctx.fillStyle = '#ff0000';
+            ctx.fillRect(food.x, food.y, scale, scale);
+            document.getElementById('repoCount').textContent = `Repositórios: ${score}`;
+        }
+
+        setInterval(update, 100);
+
+        // Função para buscar repositórios criados durante o mês
+        async function fetchRepositories() {
+            const now = new Date();
+            const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+            const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString();
+
+            try {
+                const response = await fetch(`https://api.github.com/search/repositories?q=user:PortifolioLuizSilva+created:${startOfMonth}..${endOfMonth}`);
+                const data = await response.json();
+                repoData = data.items;
+                document.getElementById('repoCount').textContent = `Repositórios: ${repoData.length}`;
+            } catch (error) {
+                console.error('Erro ao buscar repositórios:', error);
+            }
+        }
+
+        fetchRepositories();
     </script>
 
 </body>
