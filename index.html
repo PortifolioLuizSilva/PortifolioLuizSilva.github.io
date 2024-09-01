@@ -11,29 +11,33 @@
             color: #ffffff;
             margin: 0;
             padding: 0;
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden;
         }
 
         .container {
             display: flex;
-            flex-direction: column;
+            flex: 1;
             max-width: 100%;
-            margin: 0 auto;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 15px;
-            box-sizing: border-box;
+            margin: 0;
         }
 
         .sidebar {
-            width: 100%;
-            text-align: center;
-            border-bottom: 1px solid #38444d;
-            padding-bottom: 10px;
+            width: 250px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-right: 1px solid #38444d;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
         }
 
         .content {
-            width: 100%;
-            text-align: center;
+            margin-left: 250px;
+            padding: 20px;
+            width: calc(100% - 250px);
         }
 
         .logo {
@@ -78,43 +82,17 @@
             border-radius: 10px;
         }
 
-        .search-container {
-            margin: 20px auto;
-            width: 80%;
-            max-width: 600px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .search-bar {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #cccccc;
-            border-radius: 20px;
-            background-color: #ffffff;
-            color: #000000;
-            font-size: 1em;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-        }
-
-        @media (min-width: 600px) {
-            .container {
-                flex-direction: row;
-                align-items: flex-start;
-            }
-
+        @media (max-width: 768px) {
             .sidebar {
-                width: 20%;
-                border-right: 1px solid #38444d;
-                border-bottom: none;
-                text-align: left;
-                padding-bottom: 20px;
+                width: 100%;
+                position: relative;
+                height: auto;
+                border-right: none;
             }
 
             .content {
-                width: 60%;
-                border-left: 1px solid #38444d;
-                border-right: 1px solid #38444d;
+                margin-left: 0;
+                width: 100%;
             }
         }
     </style>
@@ -133,10 +111,6 @@
         <!-- Content -->
         <div class="content">
             <div class="radio-title">Ouça Nossa Rádio</div>
-            <!-- Barra de Pesquisa -->
-            <div class="search-container">
-                <input type="search" class="search-bar" placeholder="Pesquisar...">
-            </div>
             <!-- Rádio com playlist do Spotify -->
             <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn" allowtransparency="true" allow="encrypted-media"></iframe>
         </div>
