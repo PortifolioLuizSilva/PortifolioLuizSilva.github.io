@@ -7,18 +7,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
-            background-size: 600% 600%;
-            animation: gradient 15s ease infinite;
+            background-color: #000000; /* Fundo preto */
             color: #ffffff;
             margin: 0;
             padding: 0;
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
         }
 
         .container {
@@ -86,6 +78,25 @@
             border-radius: 10px;
         }
 
+        .search-container {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 20px;
+            background-color: #ffffff;
+            color: #000000;
+            font-size: 1em;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
         @media (min-width: 600px) {
             .container {
                 flex-direction: row;
@@ -122,6 +133,10 @@
         <!-- Content -->
         <div class="content">
             <div class="radio-title">Ouça Nossa Rádio</div>
+            <!-- Barra de Pesquisa -->
+            <div class="search-container">
+                <input type="search" class="search-bar" placeholder="Pesquisar...">
+            </div>
             <!-- Rádio com playlist do Spotify -->
             <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn" allowtransparency="true" allow="encrypted-media"></iframe>
         </div>
