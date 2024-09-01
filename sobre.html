@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -7,39 +7,37 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url('https://media.giphy.com/media/dark-cyberpunk-axnFGXT6MzvgY/giphy.gif') no-repeat center center fixed;
-            background-size: cover;
+            background-color: #000000; /* Fundo preto */
             color: #ffffff;
             margin: 0;
             padding: 0;
+            display: flex;
+            min-height: 100vh;
+            overflow: hidden;
         }
 
         .container {
             display: flex;
-            flex-wrap: wrap;
+            flex: 1;
             max-width: 100%;
-            margin: 0 auto;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 15px;
-            box-sizing: border-box;
-        }
-
-        .sidebar, .content {
-            padding: 20px;
+            margin: 0;
         }
 
         .sidebar {
-            width: 100%;
-            border-bottom: 1px solid #38444d;
-            text-align: center;
+            width: 250px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-right: 1px solid #38444d;
+            padding: 20px;
             box-sizing: border-box;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
         }
 
         .content {
-            width: 100%;
-            text-align: center;
-            box-sizing: border-box;
+            margin-left: 250px;
+            padding: 20px;
+            width: calc(100% - 250px);
         }
 
         .logo {
@@ -57,10 +55,12 @@
             color: #1da1f2;
             border-radius: 25px;
             text-align: center;
+            display: block;
+            text-decoration: none;
         }
 
         .menu-item a {
-            color: #1da1f2;
+            color: inherit;
             text-decoration: none;
         }
 
@@ -82,18 +82,17 @@
             margin-top: 20px;
         }
 
-        @media (min-width: 600px) {
+        @media (max-width: 768px) {
             .sidebar {
-                width: 20%;
-                border-right: 1px solid #38444d;
-                border-bottom: none;
-                text-align: left;
+                width: 100%;
+                position: relative;
+                height: auto;
+                border-right: none;
             }
 
             .content {
-                width: 60%;
-                border-left: 1px solid #38444d;
-                border-right: 1px solid #38444d;
+                margin-left: 0;
+                width: 100%;
             }
         }
     </style>
