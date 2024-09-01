@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog com Gráfico de Tecnologias</title>
+    <title>Blog - Página Inicial</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,182 +12,56 @@
             margin: 0;
             padding: 0;
             display: flex;
-            min-height: 100vh;
-            overflow: hidden;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         .container {
-            display: flex;
-            flex: 1;
-            max-width: 100%;
-            margin: 0;
-        }
-
-        .sidebar {
-            width: 250px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-right: 1px solid #38444d;
-            padding: 20px;
-            box-sizing: border-box;
-            position: fixed;
-            height: 100%;
-            overflow-y: auto;
-        }
-
-        .content {
-            margin-left: 250px;
-            padding: 20px;
-            width: calc(100% - 250px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #1e1e1e;
+            text-align: center;
         }
 
         .logo {
-            font-size: 1.5em;
+            font-size: 2em;
             font-weight: bold;
             margin-bottom: 20px;
             color: #1da1f2;
         }
 
-        .menu-item {
-            margin: 10px 0;
-            padding: 10px;
-            font-size: 1.2em;
-            cursor: pointer;
-            color: #1da1f2;
-            border-radius: 25px;
-            text-align: center;
-            display: block;
-            text-decoration: none;
+        .menu {
+            margin: 20px 0;
         }
 
-        .menu-item a {
-            color: inherit;
+        .menu-item {
+            display: block;
+            background-color: #1da1f2;
+            color: #ffffff;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             text-decoration: none;
+            margin: 10px 0;
+            transition: background-color 0.3s;
         }
 
         .menu-item:hover {
-            background-color: #1da1f2;
-            color: #ffffff;
-        }
-
-        .chart-container {
-            width: 100%;
-            max-width: 800px;
-            height: 500px;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                position: relative;
-                height: auto;
-                border-right: none;
-            }
-
-            .content {
-                margin-left: 0;
-                width: 100%;
-                padding: 10px;
-            }
-
-            .chart-container {
-                height: 300px;
-            }
+            background-color: #0d95e8;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="logo">Blog com Gráfico de Tecnologias</div>
-            <div class="menu-item"><a href="index.html">Página Inicial</a></div>
-            <div class="menu-item"><a href="sobre.html">Sobre</a></div>
-            <div class="menu-item"><a href="mailto:wireshark.luiz@proton.me">Contato</a></div>
-        </div>
-
-        <!-- Content -->
-        <div class="content">
-            <div class="chart-container">
-                <canvas id="techChart"></canvas>
-            </div>
+        <div class="logo">Blog</div>
+        <div class="menu">
+            <a href="postagem.html" class="menu-item">Fazer Postagem</a>
+            <a href="sobre.html" class="menu-item">Sobre</a>
+            <a href="mailto:wireshark.luiz@proton.me" class="menu-item">Contato</a>
         </div>
     </div>
-
-    <!-- Inclui a biblioteca Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Dados de exemplo (ajuste conforme necessário)
-        const data = {
-            labels: ['JavaScript', 'Python', 'Java', 'C++', 'HTML/CSS'],
-            datasets: [{
-                label: 'Classificação',
-                data: [90, 80, 70, 60, 50], // Pontuação fictícia
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)'
-                ],
-                borderWidth: 1
-            }]
-        };
-
-        const config = {
-            type: 'bar',
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                let grade;
-                                const value = tooltipItem.raw;
-
-                                if (value >= 90) grade = 'SSS+';
-                                else if (value >= 80) grade = 'SSS';
-                                else if (value >= 70) grade = 'SS';
-                                else if (value >= 60) grade = 'S';
-                                else grade = 'F';
-
-                                return `${tooltipItem.label}: ${value}% (${grade})`;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return value + '%';
-                            }
-                        }
-                    }
-                }
-            }
-        };
-
-        const ctx = document.getElementById('techChart').getContext('2d');
-        new Chart(ctx, config);
-    </script>
 
 </body>
 </html>
